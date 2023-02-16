@@ -77,14 +77,14 @@ $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
 	// LOCAL
-	'username' => 'root',
-	'password' => '',
-	'database' => 'kanpa_rekap',
+	// 'username' => 'root',
+	// 'password' => '',
+	// 'database' => 'kanpa_rekap',
 
 	// ONLINE
-	// 'username' => 'kina3126_kanpa',
-	// 'password' => 'kanpa2020',
-	// 'database' => 'kina3126_kanpa',
+	'username' => 'kina3126_kanpa_rekap',
+	'password' => 'kanpa2020',
+	'database' => 'kina3126_kanpa_rekap',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

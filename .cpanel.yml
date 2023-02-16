@@ -5,7 +5,6 @@ deployment:
     - /bin/cp -R application $DEPLOYPATH
     - /bin/cp -R assets $DEPLOYPATH
     - /bin/cp -R system $DEPLOYPATH
-    - /bin/cp -R vr $DEPLOYPATH
     - /bin/cp .htaccess $DEPLOYPATH
     - /bin/cp .editorconfig $DEPLOYPATH
     - /bin/cp .gitignore $DEPLOYPATH
