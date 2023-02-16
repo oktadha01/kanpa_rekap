@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>vanilla</title>
+  <meta name="viewport" content="width=device-width" />
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+      display: flex;
+      justify-content: center;
+      height: 100vh;
+      background: #0d0c2d;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(1, 160px);
+      grid-gap: 80px;
+      margin: auto 0;
+    }
+
+    @media (min-width: 420px) and (max-width: 659px) {
+      .container {
+        grid-template-columns: repeat(2, 160px);
+      }
+    }
+
+    @media (min-width: 660px) and (max-width: 899px) {
+      .container {
+        grid-template-columns: repeat(3, 160px);
+      }
+    }
+
+    @media (min-width: 900px) {
+      .container {
+        grid-template-columns: repeat(4, 160px);
+      }
+    }
+
+    .container .box {
+      width: 100%;
+    }
+
+    .container .box h2 {
+      display: block;
+      text-align: center;
+      color: #fff;
+    }
+
+    .container .box .chart {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      font-size: 40px;
+      line-height: 160px;
+      height: 160px;
+      color: #fff;
+    }
+
+    .container .box canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      width: 100%;
+    }             
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="box">
+      <div class="chart" data-percent="73" data-scale-color="#ffb400">73%</div>
+      <h2>Html</h2>
+    </div>
+    <div class="box">
+      <div class="chart" data-percent="90" data-scale-color="#ffb400">90%</div>
+      <h2>Css</h2>
+    </div>
+    <div class="box">
+      <div class="chart" data-percent="85" data-scale-color="#ffb400">85%</div>
+      <h2>Javascript</h2>
+    </div>
+    <div class="box">
+      <div class="chart" data-percent="95" data-scale-color="#ffb400">95%</div>
+      <h2>Photoshop</h2>
+    </div>
+  </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/easy-pie-chart/2.1.6/jquery.easypiechart.min.js"></script>
+
+  <script>
+ 
+    $(function() {
+      $('.chart').easyPieChart({
+        size: 160,
+        barColor: "#17d3e6",
+        scaleLength: 0,
+        lineWidth: 15,
+        trackColor: "#373737",
+        lineCap: "circle",
+        animate: 2000,
+      });
+    });
+  </script>
+
+</body>
+
+</html>

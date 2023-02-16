@@ -1,0 +1,403 @@
+<div id="add-tenaga" class="row mb-2">
+    <div class="col-12">
+        <select id="select-tenaga" class="js-states form-control col-12">
+            <option value=""></option>
+            <?php
+            $no = 1;
+            foreach ($data_tenaga as $data) :
+            ?>
+                <option id="tenaga-<?php echo $data->id_tenaga; ?>" value="<?php echo $data->id_tenaga; ?>"><?php echo $data->nm_tenaga; ?></option>
+
+            <?php
+            endforeach;
+            ?>
+        </select>
+    </div>
+</div>
+<div id="add-gaji-tenaga" hidden>
+    <hr>
+    <div class="row">
+        <div class="col-lg-3 col-md-3 col-6">
+            <label for="nm-tenaga">Nama</label>
+            <div class="form-group">
+                <input type="text" id="nm-tenaga" class="form-control" autocomplete="off" required="true" readonly>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-6">
+            <label for="hrg-tenaga">Harga</label>
+            <div class="form-group">
+                <input type="text" id="hrg-tenaga" class="form-control" autocomplete="off" required="true" readonly>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-6">
+            <label for="jmlh-h">Hari</label>
+            <div class="form-group">
+                <input type="text" id="jmlh-h" class="form-control" placeholder="Jumlah Hari ..." autocomplete="off" required="true">
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-6">
+            <label for="total-gaji-h">Total Gaji</label>
+            <div class="form-group">
+                <input type="text" id="total-gaji-h" class="form-control" autocomplete="off" required="true" readonly>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="custom-control custom-checkbox" style="font: -webkit-control; margin: 14px 2px;">
+                <input class="custom-control-input" type="checkbox" id="ceklis-lembur" value="">
+                <label for="ceklis-lembur" class="custom-control-label">Ceklis untuk tambah lemburan</label>
+            </div>
+        </div>
+    </div>
+    <div id="add-lembur-tenaga" class="row" hidden>
+        <hr class="mb-0">
+        <div class="col-lg-4 col-md-4 col-12">
+            <label for="total-lembur">Total lemburan</label>
+            <div class="form-group">
+                <input type="text" id="total-lembur" class="form-control" placeholder="Total lemburan ..." autocomplete="off" required="true">
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-6">
+            <label for="hrg-tenaga-lembur">Hrg lemburan</label>
+            <div class="form-group">
+                <input type="text" id="hrg-tenaga-lembur" class="form-control" placeholder="Jumlah Jam" autocomplete="off" required="true" readonly>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-6">
+            <label for="jmlh-j">Jam</label>
+            <div class="form-group">
+                <input type="text" id="jmlh-j" class="form-control" placeholder="Jumlah Jam" autocomplete="off" required="true" readonly>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-6">
+            <button type="button" class="btn-batal-gaji-tenaga btn btn-sm btn-outline-danger"><i class="fa-regular fa-pen-to-square"></i> Batal</button>
+        </div>
+        <div class="col-6">
+            <button type="button" class="btn-save-gaji-tenaga btn btn-sm btn-outline-success float-right" value="insert"><i class="fa-regular fa-pen-to-square"></i> Simpan Gaji</button>
+        </div>
+    </div>
+    <hr>
+</div>
+<div class="row">
+    <div class="col-lg-6 col-12 mb-3">
+        <div class="card">
+            <div class="card-header p-0">
+                <center>
+                    <h6 class="mb-0" style="background: darkseagreen;">Harian</h6>
+                </center>
+            </div>
+            <div class="card-body p-0" style="overflow-x:auto;height: 166px;">
+                <table id="nilai-harian" class="table table-head-fixed text-nowrap table-hover">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>NAMA</th>
+                            <th>HARGA</th>
+                            <th>HARI</th>
+                            <th>TOTAL</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        foreach ($data_rekap_gaji_tenaga as $data) {
+
+                        ?>
+                            <tr>
+                                <td><?php echo $no++; ?></td>
+                                <td><?php echo $data->nm_tenaga; ?></td>
+                                <td class="hrg-h-<?php echo $data->id_rekap_tenaga; ?>"><?php echo $data->hrg_tenaga; ?></td>
+
+                                <td>
+                                    <input type="text" id="jmlh-h-<?php echo $data->id_rekap_tenaga; ?>" class="jmlh-h form-control" data-action="update" data-id-tenaga="<?php echo $data->id_rekap_tenaga; ?>" value="<?php echo $data->jmlh_h; ?>">
+                                </td>
+                                <td class="total-h-<?php echo $data->id_rekap_tenaga; ?>"><?php echo $data->total_gaji_h; ?></td>
+                                <td>
+                                    <button type="button" class="btn-delete-gaji-tenaga btn btn-sm btn-outline-danger" data-id-tenaga="<?php echo $data->id_tenaga; ?>"><i class="fa-solid fa-delete-left"></i></button>
+
+                                </td>
+                            </tr>
+                        <?php
+                        }
+                        ?>
+                        <?php
+                        $no = 1;
+                        foreach ($data_tenaga_project as $data) :
+                            $id_tenaga = $data->id_tenaga;
+                        ?>
+                            <tr>
+                                <td><?php echo $no++; ?></td>
+                                <td><?php echo $data->nm_tenaga; ?></td>
+                                <td class="hrg-h-<?php echo $data->id_tenaga; ?>"><?php echo $data->hrg_tenaga; ?></td>
+                                <td>
+                                    <input type="text" id="jmlh-h-<?php echo $data->id_tenaga; ?>" class="jmlh-h form-control" data-action="insert" data-id-tenaga="<?php echo $data->id_tenaga; ?>" placeholder="Jumlah Hari ...">
+                                </td>
+                                <td class="total-h-<?php echo $data->id_tenaga; ?>">0</td>
+                            </tr>
+                        <?php
+                        endforeach;
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-footer p-0">
+                <center>
+                    <p class="mb-0">
+                        <span>Total : Rp.</span>
+                        <span id="subtotal-tenaga-h"></span>
+                    </p>
+                </center>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-12 mb-3">
+        <div class="card">
+            <div class="card-header p-0">
+                <center>
+                    <h6 class="mb-0" style="background: lightsalmon;">Lemburan</h6>
+                </center>
+            </div>
+            <div class="card-body p-0" style="overflow-x:auto;height: 166px;">
+                <table id="nilai-lembur" class="table table-head-fixed text-nowrap table-hover">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>NAMA</th>
+                            <th>HARGA</th>
+                            <th>JAM</th>
+                            <th>TOTAL</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $no = 1;
+
+                        foreach ($data_rekap_gaji_tenaga as $data) {
+
+                        ?>
+                            <tr>
+                                <td><?php echo $no++; ?></td>
+                                <td><?php echo $data->nm_tenaga; ?></td>
+                                <td class="hrg-l-<?php echo $data->id_rekap_tenaga; ?>"><?php echo $data->hrg_tenaga_lembur; ?></td>
+                                <td class="jam-l-<?php echo $data->id_rekap_tenaga; ?>"><?php echo $data->jmlh_j; ?></td>
+                                <?php
+                                if ($data->jmlh_j == '0') {
+                                ?>
+                                    <td class="total-lembur-text-<?php echo $data->id_rekap_tenaga; ?>" hidden>0</td>
+                                <?php
+                                } else {
+                                ?>
+                                    <td class="total-lembur-text-<?php echo $data->id_rekap_tenaga; ?>"><?php echo $data->total_lembur; ?></td>
+                                <?php
+                                }
+                                ?>
+                                <td>
+                                    <input type="text" id="total-l-<?php echo $data->id_rekap_tenaga; ?>" class="total-lembur form-control" data-action="update" data-id-tenaga="<?php echo $data->id_rekap_tenaga; ?>" value="0">
+                                </td>
+                                <!-- <td hidden>0</td> -->
+                            </tr>
+                            <script>
+                                new AutoNumeric('#total-l-<?php echo $data->id_rekap_tenaga; ?>', autoNumericOption);
+                            </script>
+                        <?php
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-footer p-0">
+                <center>
+                    <p class="mb-0">
+                        <span>Total : Rp.</span>
+                        <span id="subtotal-tenaga-l"></span>
+                    </p>
+                </center>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="text" id="id-tenaga" value="" hidden>
+<input type="text" id="id-rekap-tenaga" value="" hidden>
+<input type="text" id="action-input-h" value="">
+<script>
+    var id_project = $('#id-project').val();
+    total_gaji_harian();
+    total_gaji_lemburan();
+
+
+    var subtotal_tenaga = parseFloat(removeCommas($('#subtotal-tenaga-h').text())) + parseFloat(removeCommas($('#subtotal-tenaga-l').text()))
+    $("#subtotal-tenaga-" + id_project).text(addCommas(subtotal_tenaga));
+
+    $('#add-gaji-tenaga, #add-lembur-tenaga').removeAttr('hidden', true).hide();
+    $('#select-tenaga').change(function(e) {
+        // alert($("#select-tenaga").find(':selected').val())
+        let formData = new FormData();
+        formData.append('id-project', $('#id-project').val());
+        formData.append('project-progres', $('#project-progres').val());
+        formData.append('id-tenaga', $("#select-tenaga").find(':selected').val());
+        $.ajax({
+            type: 'POST',
+            url: "<?php echo site_url('project/add_tenaga_project'); ?>",
+            data: formData,
+            cache: false,
+            processData: false,
+            contentType: false,
+            success: function(data) {
+                // alert('ya')
+                load_data_rekap_tenaga();
+            },
+            error: function() {
+                alert("Data Gagal Diupload");
+            }
+        });
+    });
+
+    $('.btn-edit-gaji-tenaga').click(function() {
+        $('#add-gaji-tenaga').show();
+        $('#add-tenaga').hide();
+        $('#id-rekap-tenaga').val($(this).data('id-rekap-tenaga'));
+        $('#jmlh-h').val($(this).data('jmlh-h'));
+        $('#total-gaji-h').val($(this).data('total-gaji-h'));
+        $('#id-tenaga').val($(this).data('id-tenaga'))
+        $('#nm-tenaga').val($(this).data('nm-tenaga'))
+        $('#hrg-tenaga').val($(this).data('hrg-tenaga'));
+        $('#hrg-tenaga-lembur').val($(this).data('hrg-tenaga-lembur'))
+        if ($('#jmlh-h').val() == '') {
+
+            $('.btn-save-gaji-tenaga').val('insert');
+        } else {
+            $('.btn-save-gaji-tenaga').val('update');
+        }
+    });
+    $('.btn-batal-gaji-tenaga').click(function() {
+        $('#add-gaji-tenaga').hide();
+        $('#add-tenaga').show();
+    });
+    $('#ceklis-lembur').click(function(e) {
+        if ($(this).is(":checked")) {
+            $('#add-lembur-tenaga').show()
+        } else {
+            $('#add-lembur-tenaga').hide()
+
+        }
+    });
+    // $('.btn-save-gaji-tenaga').click(function() {
+    //     // alert($(this).val());
+    //     let formData = new FormData();
+    //     formData.append('action', $(this).val());
+    //     formData.append('id-rekap-tenaga', $('#id-rekap-tenaga').val());
+    //     formData.append('id-tenaga', $('#id-tenaga').val());
+    //     formData.append('id-project', $('#id-project').val());
+    //     formData.append('project-progres', $('#project-progres').val());
+    //     formData.append('jmlh-h', $('#jmlh-h').val());
+    //     formData.append('total-gaji-h', $('#total-gaji-h').val());
+    //     formData.append('jmlh-j', $('#jmlh-j').val());
+    //     formData.append('total-lembur', $('#total-lembur').val());
+    //     $.ajax({
+    //         type: 'POST',
+    //         url: "<?php echo site_url('project/add_gaji_tenaga'); ?>",
+    //         data: formData,
+    //         cache: false,
+    //         processData: false,
+    //         contentType: false,
+    //         success: function(data) {
+    //             // alert('ya')
+    //             load_data_rekap_tenaga();
+    //         },
+    //         error: function() {
+    //             alert("Data Gagal Diupload");
+    //         }
+    //     });
+    // })
+    $('.btn-delete-gaji-tenaga').click(function() {
+        var el = this;
+
+        // Delete id
+        var confirmalert = confirm("Are you sure?");
+        if (confirmalert == true) {
+            let formData = new FormData();
+            formData.append('id-tenaga', $(this).data('id-tenaga'));
+            $.ajax({
+                type: 'POST',
+                url: "<?php echo site_url('project/delete_tenaga_project') ?>",
+                data: formData,
+                cache: false,
+                processData: false,
+                contentType: false,
+                success: function(msg) {
+                    $(el).closest('tr').css('background', 'tomato');
+                    $(el).closest('tr').fadeOut(300, function() {
+                        $(this).remove();
+                    });
+                }
+            });
+        }
+    });
+    new AutoNumeric('#total-lembur', autoNumericOption);
+    // $('.jmlh-h').click(function() {
+
+    // alert($(this).data('id-tenaga'));
+    // $('#id-input-h').val($(this).data('id-tenaga'));
+    // });
+    $(document).on("input", ".total-lembur", function(e) {
+        // alert('ya')
+        $('.total-lembur-text-' + $(this).data('id-tenaga')).text($('#total-l-' + $(this).data('id-tenaga')).val());
+        var hasil_lembur_j = parseFloat(removeCommas($('#total-l-' + $(this).data('id-tenaga')).val()) / removeCommas($('.hrg-l-' + $(this).data('id-tenaga')).text()))
+        $('.jam-l-' + $(this).data('id-tenaga')).text(hasil_lembur_j);
+        // let formData = new FormData();
+        // formData.append('id-rekap-tenaga', $(this).data('id-tenaga'));
+        // formData.append('jmlh-j', $('#jam-l-' + $(this).data('id-tenaga')).text());
+        // formData.append('total-lembur', $('#total-l-' + $(this).data('id-tenaga')).val());
+        // $.ajax({
+        //     type: 'POST',
+        //     url: "<?php echo site_url('project/add_gaji_tenaga_lembur'); ?>",
+        //     data: formData,
+        //     cache: false,
+        //     processData: false,
+        //     contentType: false,
+        //     success: function(data) {
+        //         if ($('#action-input-h').val() == 'update') {
+
+
+        //         } else {
+        //             load_data_rekap_tenaga();
+
+        //         }
+        //     },
+        //     error: function() {
+        //         alert("Data Gagal Diupload");
+        //     }
+        // });
+    });
+    // $(document).on("input", "#hrg-tenga,#jmlh-h", function(e) {
+    //     var $hasil_gaji_h = parseFloat(removeCommas($('#hrg-tenaga').val())) * parseInt($('#jmlh-h').val())
+    //     $('#total-gaji-h').val(addCommas($hasil_gaji_h));
+    // });
+    // $(document).on("input", "#total-lembur,#hrg-tenga-lembur", function(e) {
+    //     var hasil_lembur_j = parseFloat(removeCommas($('#total-lembur').val()) / removeCommas($('#hrg-tenaga-lembur').val()))
+    //     $('#jmlh-j').val(hasil_lembur_j);
+    // });
+    function total_gaji_harian() {
+        var table_h = document.getElementById("nilai-harian"),
+            sumHsl_h = 0;
+        for (var t = 1; t < table_h.rows.length; t++) {
+            sumHsl_h = sumHsl_h + parseFloat(removeCommas(table_h.rows[t].cells[4].innerHTML));
+        }
+        $("#subtotal-tenaga-h").text(addCommas(sumHsl_h));
+    }
+
+    function total_gaji_lemburan() {
+        var table_l = document.getElementById("nilai-lembur"),
+            sumHsl_l = 0;
+        for (var t = 1; t < table_l.rows.length; t++) {
+            sumHsl_l = sumHsl_l + parseFloat(removeCommas(table_l.rows[t].cells[4].innerHTML));
+        }
+        $("#subtotal-tenaga-l").text(addCommas(sumHsl_l));
+    }
+    $("#select-tenaga").select2({
+        placeholder: "Tambah tenaga",
+        allowClear: true
+    });
+</script>
