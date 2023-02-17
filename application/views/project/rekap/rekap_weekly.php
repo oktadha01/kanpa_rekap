@@ -56,6 +56,8 @@
                 contentType: false,
                 success: function(data) {
                     load_data_rekap_weely();
+                    load_data_rekap_material();
+
                 },
                 error: function() {
                     alert("Data Gagal Diupload");

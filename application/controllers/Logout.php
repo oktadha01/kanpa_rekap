@@ -13,7 +13,7 @@ class Logout extends CI_Controller
     }
     public function index()
     {
-        $sess_data = ['id_user', 'nm_user', 'password', 'is_login'];
+        $sess_data = ['id_user', 'nm_user', 'password', 'id_privilage_user', 'is_login'];
 
         $this->session->unset_userdata($sess_data);
         $this->session->sess_destroy();

@@ -102,7 +102,7 @@
 
                 } else {
                     $('#form-data-rekap-' + id_project).removeAttr('hidden', true);
-                    load_data_rekap_material()
+                    load_data_rekap_material();
                 }
 
 
